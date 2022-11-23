@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3f5fcb4-d567-45ec-a647-7c54146708d5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/font/Oxygen-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/font/Oxygen-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/font/Oxygen-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/font/intro-script-demo-medium.otf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +42,17 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ugocm/Documents/GitHub/WorldTask-v0.1",
+    "last_opened_file_path": "C:/Users/ugocm/Documents/GitHub/flickit-frontend-react/assets",
     "nodejs_package_manager_path": "yarn",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ugocm\Documents\GitHub\flickit-frontend-react\assets" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669208230075</updated>
-      <workItem from="1669208231851" duration="3790000" />
+      <workItem from="1669208231851" duration="6881000" />
     </task>
     <servers />
   </component>
