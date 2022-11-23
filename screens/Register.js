@@ -1,7 +1,7 @@
 import {SafeAreaView, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
 
 
-export default function Register() {
+export default function Register({navigation}) {
     return (
         <SafeAreaView style={{justifyContent: "center", alignItems: "center", marginTop: 30}}>
             <View>
@@ -34,9 +34,20 @@ export default function Register() {
                     justifyContent: "center",
                     alignItems: "center",
                 }}
+                onPress={() => navigation.navigate("Login")}
             >
                 <Text style={{color: "white", fontWeight: "bold", fontSize: 15}}>Sign Up</Text>
             </TouchableOpacity>
+            
+            <Text
+                style={{
+                    color: "blue",
+                    textAlign: "center",
+                    textDecorationLine: "underline"
+                }}
+            >
+                Already got an account ? Login here.
+            </Text>
         </SafeAreaView>
     )
 }
