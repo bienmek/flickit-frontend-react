@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b3f5fcb4-d567-45ec-a647-7c54146708d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/font/Oxygen-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/font/Oxygen-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/font/Oxygen-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/font/intro-script-demo-medium.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/arrow-thin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/classement_black.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/lens_fill.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/profile_black.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/BottomTab.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/EyesRoutine.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/FlickSubjectManager.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/TopTab.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/samples/flick-object-sample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/CameraScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/Profile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/Ranking.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/colors.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/adaptive-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/splash.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,15 +62,23 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ugocm/Documents/GitHub/flickit-frontend-react/assets",
+    "last_opened_file_path": "/home/ugo/Documents/Projects/FlickIt/flickit-frontend-react",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="C:\Users\ugocm\Documents\GitHub\flickit-frontend-react\assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/components" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -62,6 +90,14 @@
       <option name="presentableId" value="Default" />
       <updated>1669208230075</updated>
       <workItem from="1669208231851" duration="6881000" />
+      <workItem from="1672817551302" duration="30000" />
+      <workItem from="1672818074116" duration="4602000" />
+      <workItem from="1672822710265" duration="49000" />
+      <workItem from="1672822769008" duration="47000" />
+      <workItem from="1672822834162" duration="2130000" />
+      <workItem from="1672825155111" duration="14125000" />
+      <workItem from="1672853479920" duration="23000" />
+      <workItem from="1673420551907" duration="1836000" />
     </task>
     <servers />
   </component>
