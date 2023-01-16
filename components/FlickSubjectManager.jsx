@@ -168,6 +168,7 @@ export default function FlickSubjectManager ({object}) {
                     {object.reward}
                 </Text>
             </View>
+        
 
 
         </SafeAreaView>
