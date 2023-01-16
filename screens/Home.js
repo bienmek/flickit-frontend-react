@@ -10,17 +10,16 @@ import EyesRoutine from "../components/EyesRoutine";
 import {objects} from "../samples/flick-object-sample";
 import BottomTab from "../components/BottomTab";
 import TopTab from "../components/TopTab";
+import {useObjectContext} from "../context/objectContext";
 
-
-
-export default function Home({navigation}) {
+export default function Home({navigation, route}) {
     const [handleEyes, setHandleEyes] = useState(eyes);
-    const [objectList, setObjectList] = useState(objects);
 
-    const computeObject = () => {
-        return objectList[3]
-    }
+    const {currentObject, takenFlick} = useObjectContext()
 
+    useEffect(() => {
+        console.log(takenFlick)
+    }, [])
 
     return (
         <>
@@ -35,15 +34,23 @@ export default function Home({navigation}) {
                     backgroundColor: "white"
                 }}
             >
-
-                {objectList.length > 0 ? (
-                    <FlickSubjectManager object={computeObject()} />
-                ) : (
+                {!!takenFlick && (
+                    <Image
+                        source={{uri: takenFlick.uri}}
+                        style={{
+                            height: 300,
+                            width: 150,
+                            resizeMode: "contain"
+                        }}
+                    />
+                )}
+                {!!currentObject && !takenFlick ? (
+                    <FlickSubjectManager />
+                ) : !takenFlick && (
                     <EyesRoutine handleEyes={handleEyes}/>
                 )}
             </SafeAreaView>
-            <BottomTab navigation={navigation} isFlickTime={objectList.length > 0}/>
+            <BottomTab navigation={navigation}/>
         </>
-
     )
 }

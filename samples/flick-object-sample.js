@@ -45,3 +45,54 @@ export const objects = [
         image: "🚒"
     }
 ]
+
+export const users = [
+    {
+        username: "TitouX",
+        email: "aaa@aaa.com",
+        profile_picture: "http://fireXXXXXXX",
+        points: 500,
+        flicks: [
+            {
+                object: "Fire truck",
+                time_to_take: 1231231932,
+                points: 500
+            },
+            "XXXXXXXXXXXXXXXXXXX",
+            "XXXXXXXXXXXXXXXXXXXX"
+        ],
+        rank: 2
+    },
+    {
+        username: "TitouX",
+        email: "aaa@aaa.com",
+        profile_picture: "http://fireXXXXXXX",
+        points: 500,
+        flicks: [
+            {
+                object: "Fire truck",
+                time_to_take: 1231231932,
+                points: 500
+            },
+            "XXXXXXXXXXXXXXXXXXX",
+            "XXXXXXXXXXXXXXXXXXXX"
+        ],
+        rank: 2
+    },
+    {
+        username: "TitouX",
+        email: "aaa@aaa.com",
+        profile_picture: "http://fireXXXXXXX",
+        points: 500,
+        flicks: [
+            {
+                object: "Fire truck",
+                time_to_take: 1231231932,
+                points: 500
+            },
+            "XXXXXXXXXXXXXXXXXXX",
+            "XXXXXXXXXXXXXXXXXXXX"
+        ],
+        rank: 2
+    }
+]

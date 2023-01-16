@@ -1,19 +1,21 @@
 import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import profile from "../assets/images/profile_outlined.png"
 import home from "../assets/images/lens_outline.png"
 import flickTime from "../assets/images/lens_outline_colored.png"
 import ranking from "../assets/images/classement.png"
-import profile_black from "../assets/images/profile_black.png"
 import home_black from "../assets/images/lens_fill.png"
 import ranking_black from "../assets/images/classement_black.png"
 import {gray, light_gray, primary} from "../utils/colors";
 import {useRoute} from "@react-navigation/native";
 import {useEffect} from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import {useObjectContext} from "../context/objectContext";
 
-export default function BottomTab({navigation, isFlickTime}) {
+export default function BottomTab({navigation}) {
 
     const route = useRoute()
+
+    const {currentObject} = useObjectContext()
+
     useEffect(() => {
         console.log(route.name)
     }, []);
@@ -60,7 +62,7 @@ export default function BottomTab({navigation, isFlickTime}) {
 
             </TouchableOpacity>
 
-            {isFlickTime && (
+            {(!!currentObject && route.name === "Home") && (
                 <View
                     style={{
                         position: "absolute",
@@ -76,7 +78,7 @@ export default function BottomTab({navigation, isFlickTime}) {
                             fontSize: 11,
                         }}
                     >
-                        Flick it !
+                        Flick it!
                     </Text>
                 </View>
 
@@ -89,8 +91,7 @@ export default function BottomTab({navigation, isFlickTime}) {
                 }}
                 activeOpacity={0.7}
                 onPress={() => {
-                    if (isFlickTime && route.name === "Home") {
-                        console.log("ITS FLICK TIME!!!")
+                    if (!!currentObject && route.name === "Home") {
                         navigation.navigate("CameraScreen")
                     } else {
                         navigation.navigate("Home")
@@ -98,7 +99,7 @@ export default function BottomTab({navigation, isFlickTime}) {
                 }}
             >
                 <Image
-                    source={isFlickTime ? flickTime : route.name === "Home" ? home_black : home}
+                    source={!!currentObject && route.name === "Home" ? flickTime : route.name === "Home" ? home_black : home}
                     style={{
                         height: "100%",
                         width: "100%"

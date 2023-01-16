@@ -1,22 +1,25 @@
 import {Camera, CameraType, FlashMode} from 'expo-camera';
-import { useState } from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import BottomTab from "../components/BottomTab";
-import TopTab from "../components/TopTab";
-import {primary} from "../utils/colors";
-import Ionicons from "react-native-vector-icons/Ionicons";
-export default function CameraScreen ({navigation, route}) {
+import {useEffect, useRef, useState} from 'react';
+import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import TakePictureLayout from "../components/TakePictureLayout";
+import PictureTakenLayout from "../components/PictureTakenLayout";
+import {useObjectContext} from "../context/objectContext";
+
+export default function CameraScreen ({navigation}) {
     const [type, setType] = useState(CameraType.back);
     const [flashMode, setFlashMode] = useState(FlashMode.off);
     const [permission, requestPermission] = Camera.useCameraPermissions();
+    const [flick, setFlick] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [lastTap, setLastTap] = useState(null);
+
+    const cameraRef = useRef(null)
 
     if (!permission) {
-        // Camera permissions are still loading
         return <View />;
     }
 
     if (!permission.granted) {
-        // Camera permissions are not granted yet
         return (
             <View style={styles.container}>
                 <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
@@ -29,98 +32,64 @@ export default function CameraScreen ({navigation, route}) {
         setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
 
-    function takePicture() {
+    async function takePicture() {
+        try {
+            if (cameraRef) {
+                setLoading(true)
+                const pic = await cameraRef.current.takePictureAsync()
+                setLoading(false)
+                setFlick(pic)
+            }
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     function toggleFlashMode() {
         setFlashMode(current => (current === FlashMode.off ? FlashMode.on : FlashMode.off))
     }
 
+    function handleDoubleTap() {
+        const now = Date.now();
+        if (lastTap && (now - lastTap) < 200) {
+            toggleCameraType()
+        }
+        setLastTap(now);
+    }
+
     return (
         <>
-            <View style={styles.container}>
-                <Camera style={styles.camera} type={type} flashMode={flashMode}>
+            <TouchableOpacity
+                style={styles.container}
+                activeOpacity={1}
+                onPress={handleDoubleTap}
+            >
+                <Camera
+                    style={styles.camera}
+                    type={type}
+                    flashMode={flashMode}
+                    ref={cameraRef}
+                >
 
-                    <View
-                        style={{
-                            top: 30,
-                            right: 20,
-                            alignSelf: "flex-end",
-                            flexDirection: "column",
-                            height: "20%",
-                            position: "absolute",
-                            justifyContent: "flex-start",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: "white",
-                                height: 50,
-                                width: 50,
-                                borderRadius: 20,
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                            activeOpacity={0.7}
-                            onPress={toggleCameraType}
-                        >
-                            <Ionicons
-                                name={"camera-reverse-outline"}
-                                size={30}
-                                color={"black"}
-                            />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: "white",
-                                height: 50,
-                                width: 50,
-                                borderRadius: 20,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                top: 30
-                            }}
-                            onPress={toggleFlashMode}
-                            activeOpacity={0.7}
-                        >
-                            {flashMode === FlashMode.on ? (
-                                <Ionicons
-                                    name={"flash-outline"}
-                                    size={30}
-                                    color={"black"}
-                                />
-                            ) : (
-                                <Ionicons
-                                    name={"flash-off-outline"}
-                                    size={30}
-                                    color={"black"}
-                                />
-                            )}
-                        </TouchableOpacity>
-
-                    </View>
-
-                    <TouchableOpacity
-                        style={{
-                            position: "absolute",
-                            backgroundColor: primary,
-                            borderWidth: 5,
-                            borderColor: "white",
-                            height: 80,
-                            width: 80,
-                            borderRadius: 100,
-                            bottom: 80,
-                            alignSelf: "center"
-                        }}
-                        activeOpacity={0.7}
-                        onPress={takePicture}
-                    >
-                    </TouchableOpacity>
+                    {flick ? (
+                        <PictureTakenLayout
+                            flick={flick}
+                            deleteFlick={() => setFlick(null)}
+                            isFrontCamera={(type === CameraType.front)}
+                            navigation={navigation}
+                        />
+                    ) : (
+                        <TakePictureLayout
+                            flashMode={flashMode}
+                            loading={loading}
+                            takePicture={takePicture}
+                            toggleCameraType={toggleCameraType}
+                            toggleFlashMode={toggleFlashMode}
+                            navigation={navigation}
+                        />
+                    )}
                 </Camera>
-            </View>
+            </TouchableOpacity>
         </>
     );
 };
