@@ -12,6 +12,7 @@ import {
 import { users } from "../samples/flick-object-sample";
 import React from "react";
 import { Image } from "react-native";
+import { RedirectSource } from "react-avatar";
 
 const Elephant = require("../assets/images/Elephant.jpeg");
 const Bike = require("../assets/images/bike.jpeg");
@@ -43,74 +44,82 @@ export default function LastFlick() {
             width: "100%",
             flexDirection: "row",
             justifyContent: "flex-start",
-            paddingVertical: 10,
+            alignItems: "flex-end",
           }}
         >
           <Image
             source={Elephant}
             style={{
-              height: 175,
-              width: 100,
+              height: 200,
+              width: 120,
               borderRadius: 10,
             }}
-          ></Image>
+          />
           <Text
             style={{
               fontSize: 30,
-                left: 195,
-                top: -50,
+              position: "absolute",
+              top: 0,
+              right: 0,
               color: dark_gray,
             }}
           >
-            {"\n"}
             {users[0].flicks.find((flick) => flick.object === "Bike").points}
             {"⭐"}
           </Text>
-          <Text
+
+          <View
             style={{
-              fontSize: 80,
-              left: -50,
-              top: 10,
-              color: secondary,
-              fontWeight: "bold",
+                marginLeft: 10,
+                justifyContent: "center",
+                alignItems: "center"
             }}
           >
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .minutes
-            }
-            :
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .secondes
-            }
-            {"\n"}
-          </Text>
-          <Text
-            style={{
-              fontSize: 50,
-              left: -280,
-              top: 30,
-              color: dark_gray,
-            }}
+            <Text
+                style={{
+                    fontSize: 70,
+                    color: secondary,
+                    fontWeight: "bold",
+                }}
+            >
+                {users[0].flicks.find((flick) => flick.object === "Elephant").minutes}
+                :
+                {users[0].flicks.find((flick) => flick.object === "Elephant").secondes}
+            </Text>
+            <Text
+                style={{
+                    fontSize: 50,
+                    color: dark_gray,
+                }}
           >
-            {"\n"}
             {users[0].flicks.find((flick) => flick.object === "Elephant").object}
           </Text>
+
           <Text
             style={{
               fontSize: 20,
-              left: -480,
-              top: 150,
               color: gray,
             }}
           >
-            {users[0].flicks.find((flick) => flick.object === "Elephant").heurespic}H
-            {users[0].flicks.find((flick) => flick.object === "Elephant").minutespic} -
-            {users[0].flicks.find((flick) => flick.object === "Elephant").datepic}
-
-
+            {
+              users[0].flicks.find((flick) => flick.object === "Elephant")
+                .heurespic
+            }
+            H
+            {
+              users[0].flicks.find((flick) => flick.object === "Elephant")
+                .minutespic
+            }{" "}
+            -
+            {
+              users[0].flicks.find((flick) => flick.object === "Elephant")
+                .datepic
+            }
           </Text>
+        </View>
+          
+          
+          
         </View>
         <View></View>
 

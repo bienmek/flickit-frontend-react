@@ -7,6 +7,7 @@ import Profile from "./screens/Profile";
 import Ranking from "./screens/Ranking";
 import CameraScreen from "./screens/CameraScreen"
 import ObjectContextProvider from "./context/objectContext";
+import Settings from "./screens/Settings";
 
 const Stack = createStackNavigator()
 
@@ -21,6 +22,7 @@ export default function App() {
                   <Stack.Screen name={"Profile"} component={Profile} options={{animationEnabled: false, headerShown: false}}/>
                   <Stack.Screen name={"Ranking"} component={Ranking} options={{animationEnabled: false, headerShown: false}}/>
                   <Stack.Screen name={"CameraScreen"} component={CameraScreen} options={{animationEnabled: false, headerShown: false}}/>
+                  <Stack.Screen name={"Settings"} component={Settings} options={{headerShown: false}}/>
               </Stack.Navigator>
           </ObjectContextProvider>
       </NavigationContainer>
