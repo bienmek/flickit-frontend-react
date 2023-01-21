@@ -8,9 +8,11 @@ import {useObjectContext} from "../context/objectContext";
 export default function PictureTakenLayout({flick, deleteFlick, isFrontCamera, navigation}) {
 
     const HEIGHT = Dimensions.get('window').height
-    const WIDTH = Dimensions.get('window').width
 
-    const {setTakenFlick} = useObjectContext()
+    const {
+        setTakenFlick,
+        computeTimeTaken
+    } = useObjectContext()
 
     function isImagePortrait () {
         return flick.height > flick.width
@@ -95,7 +97,8 @@ export default function PictureTakenLayout({flick, deleteFlick, isFrontCamera, n
                 activeOpacity={0.7}
                 onPress={() => {
                     setTakenFlick(flick)
-                    navigation.navigate("Home")
+                    computeTimeTaken()
+                    navigation.navigate("ConfirmationScreen")
                 }}
             >
                 <Text

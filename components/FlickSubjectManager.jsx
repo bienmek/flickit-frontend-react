@@ -71,7 +71,7 @@ export default function FlickSubjectManager () {
             >
                 <Text
                     style={{
-                        fontSize: 50,
+                        fontSize: 40,
                         zIndex: 99,
                     }}
                 >

@@ -50,7 +50,7 @@ export const users = [
         username: "TitouXTv",
         email: "thibault.velly@isen.yncrea.fr",
         profile_picture: "../assets/images/titoux.jpeg",
-        points: 5000,
+        points: 5050,
         flicks: [
             {
                 object: "Fire truck",

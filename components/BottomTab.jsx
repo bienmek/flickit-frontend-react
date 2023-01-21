@@ -76,6 +76,7 @@ export default function BottomTab({navigation}) {
                         style={{
                             color: primary,
                             fontSize: 11,
+                            fontWeight: "bold"
                         }}
                     >
                         Flick it!
@@ -99,7 +100,11 @@ export default function BottomTab({navigation}) {
                 }}
             >
                 <Image
-                    source={!!currentObject && route.name === "Home" ? flickTime : route.name === "Home" ? home_black : home}
+                    source={
+                    !!currentObject && route.name === "Home" ? flickTime :
+                        (route.name === "Home" || route.name === "ConfirmationScreen") ? home_black :
+                            home
+                    }
                     style={{
                         height: "100%",
                         width: "100%"
