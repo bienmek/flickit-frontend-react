@@ -21,7 +21,11 @@
     "expo-linear-gradient": "^12.0.1",
     "expo-media-library": "^15.0.0",
     "expo-status-bar": "~1.4.2",
+<<<<<<< HEAD
     "pretty-format": "^29.3.1",
+=======
+    "firebase": "^9.15.0",
+>>>>>>> 72a078a5ae308529e0fd64cc9102a7c56aabe58e
     "react": "18.1.0",
     "react-avatar": "^5.0.3",
     "react-native": "^0.71.0",

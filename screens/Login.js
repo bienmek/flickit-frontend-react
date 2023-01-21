@@ -1,14 +1,23 @@
-import {SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {useState} from "react";
 import TopTab from "../components/TopTab";
+import {useUserContext} from "../context/userContext";
 
 export default function Login({navigation}) {
     const [error, setError] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const {loginUser, loading, setLoading} = useUserContext()
+
     const onSubmit = () => {
-        navigation.navigate("Home")
+        setLoading(true)
+        loginUser(email, password)
+            .then(() => {
+                setError("")
+            })
+            .catch(() => setError("E-mail and password doesnt match"))
+            .finally(() => setLoading(false))
     }
 
     return (
@@ -27,6 +36,16 @@ export default function Login({navigation}) {
                         {error}
                     </Text>
 
+                )}
+
+                {loading && (
+                    <View
+                        style={{
+                            marginTop: 20
+                        }}
+                    >
+                        <ActivityIndicator size="large" color="#959595" />
+                    </View>
                 )}
 
                 <View>

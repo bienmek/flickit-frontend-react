@@ -1,9 +1,10 @@
-import {View, StyleSheet, Image, TouchableOpacity, StatusBar} from "react-native";
+import {View, StyleSheet, Image, TouchableOpacity, StatusBar, Text, SafeAreaView} from "react-native";
 import arrow from "../assets/images/arrow-thin.png"
 import logo from "../assets/images/logo-flickit.png"
 import {useEffect, useState} from "react";
 import {useRoute} from "@react-navigation/native";
 import {isIphoneX} from "react-native-iphone-x-helper";
+import {users} from "../samples/flick-object-sample";
 
 export default function TopTab({navigation}) {
 
@@ -12,7 +13,7 @@ export default function TopTab({navigation}) {
     return (
         <>
             <StatusBar barStyle={"dark-content"}/>
-            <View style={styles.tab}>
+            <SafeAreaView style={styles.tab}>
                 <View style={styles.container}>
                     {(navigation.canGoBack() && route.name !== "Profile" && route.name !== "Home" && route.name !== "Ranking") ? (
                         <View style={{flex: 1}}>
@@ -49,16 +50,61 @@ export default function TopTab({navigation}) {
                             }}
                         />
                     </TouchableOpacity>
-                    <View style={{flex: 1}}></View>
+
+                    {(route.name !== "Register" && route.name !== "Login") ? (
+                        <>
+                            <View style={{flex: 1}}></View>
+                            <View
+                                style={{
+                                    position: "absolute",
+                                    borderRadius: 20,
+                                    borderWidth: 1,
+                                    borderColor: "black",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    paddingHorizontal: 5,
+                                    paddingVertical: 7,
+                                    right: 10,
+                                    width: 90,
+                                    overflow: "hidden",
+                                    bottom: 5
+                                }}
+                            >
+
+                                <View>
+                                    <Text
+                                        style={{
+                                            fontSize: 18
+                                        }}
+                                    >
+                                        {"⭐"}
+                                    </Text>
+                                </View>
+
+                                <View>
+                                    <Text
+                                        style={{
+                                            fontSize: 15,
+                                            color: "black",
+                                            fontWeight: "bold"
+                                        }}
+                                    >
+                                        {users[0].points}
+                                    </Text>
+                                </View>
+                            </View>
+                        </>
+                    ) : (<View style={{flex: 1}}></View>)}
                 </View>
-            </View>
+            </SafeAreaView>
         </>
     )
 }
 
 const styles = StyleSheet.create({
     tab: {
-        height: isIphoneX() ? 90 : 80,
+        height: isIphoneX() ? 100 : 80,
         backgroundColor: "white",
         borderBottomWidth: 0.5,
         borderBottomColor: "#959595",

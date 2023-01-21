@@ -1,7 +1,10 @@
-import {SafeAreaView, Text, TextInput, TouchableOpacity, View, StyleSheet} from "react-native";
+import {SafeAreaView, Text, TextInput, TouchableOpacity, View, StyleSheet, ActivityIndicator} from "react-native";
 import {useFonts} from "expo-font";
 import {useEffect, useState} from "react";
 import TopTab from "../components/TopTab";
+import {useUserContext} from "../context/userContext";
+import {sendEmailVerification, updateProfile} from "firebase/auth";
+import {auth} from "../firebase";
 
 
 export default function Register({navigation}) {
@@ -12,27 +15,52 @@ export default function Register({navigation}) {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    const {registerUser, loading, errorContext, setLoading} = useUserContext()
+
     const onSubmit = () => {
-        if ((regex.test(email) === false) && email) {
-            setError("Invalid email address")
-            return
-        }
         if (username.length < 4) {
             setError("The username must have a minimum length of 4 characters")
             return
         }
+
+        if ((regex.test(email) === false)) {
+            setError("Invalid email address")
+            return
+        }
+
         if (password.length < 6) {
             setError("The password must have a minimum length of 6 characters")
             return
         }
+
         setError("")
-        console.log("C'est bon")
+        registerUser(username, email, password)
+            .then(() =>
+                updateProfile(auth.currentUser, {
+                    displayName: username
+                })
+            )
+            .then(() => {
+                sendEmailVerification(auth.currentUser, {
+                    handleCodeInApp: true,
+                    url: "https://flick-it-373707.firebaseapp.com"
+                })
+                    .then(() => navigation.navigate("EmailVerification", {routeMail: email, routePassword: password}))
+            })
+            .catch(() => setError("The email is already use by an other user"))
+            .finally(() => setLoading(false));
     }
 
     return (
         <>
             <TopTab navigation={navigation} />
-            <SafeAreaView style={{justifyContent: "center", alignItems: "center", marginTop: 30}}>
+            <SafeAreaView
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 30
+                }}
+            >
                 {error && (
                     <Text
                         style={{
@@ -44,7 +72,29 @@ export default function Register({navigation}) {
                     >
                         {error}
                     </Text>
+                )}
 
+                {errorContext && (
+                    <Text
+                        style={{
+                            color: "red",
+                            fontWeight: "bold",
+                            fontSize: 13,
+                            textAlign: "center"
+                        }}
+                    >
+                        {errorContext}
+                    </Text>
+                )}
+
+                {loading && (
+                    <View
+                        style={{
+                            marginTop: 20
+                        }}
+                    >
+                        <ActivityIndicator size="large" color="#959595" />
+                    </View>
                 )}
                 <View>
                     <Text style={styles.label}>Username</Text>
@@ -94,7 +144,7 @@ export default function Register({navigation}) {
                     </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigation.navigate("Log In")}>
+                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                     <Text
                         style={{
                             color: "blue",
