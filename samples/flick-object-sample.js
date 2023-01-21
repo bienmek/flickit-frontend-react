@@ -51,6 +51,13 @@ export const users = [
         email: "thibault.velly@isen.yncrea.fr",
         profile_picture: "../assets/images/titoux.jpeg",
         points: 5000,
+        numberofflicks: 30,
+        averagetime: [
+            {
+                minutes: 23,
+                secondes: 10,
+            }
+        ],
         flicks: [
             {
                 object: "Fire truck",

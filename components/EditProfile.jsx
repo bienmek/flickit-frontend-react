@@ -18,7 +18,6 @@ const EditProfile = () => {
   const [username, setUsername] = useState("");
 
   return (
-    
     <View
       style={{
         width: "100%",
@@ -75,13 +74,12 @@ const EditProfile = () => {
       />
       <View
         style={{
-            flexDirection: 'row',
-            paddingTop: 20,
+          flexDirection: "row",
+          paddingTop: 20,
         }}
-
       >
-        <MyButton title="Save" onPress={() => console.log("Settings saved")} />
         <MyButton title="Logout" onPress={() => console.log("User @ logout")} />
+        <MyButton title="Save" onPress={() => console.log("Settings saved")} />
       </View>
     </View>
   );

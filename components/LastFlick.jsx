@@ -26,7 +26,6 @@ export default function LastFlick() {
           flexDirection: "col",
           justifyContent: "flex-start",
           paddingHorizontal: 10,
-          paddingVertical: 20,
         }}
       >
         <Text
@@ -39,6 +38,89 @@ export default function LastFlick() {
         >
           Last Flicks
         </Text>
+        <View
+          style={{
+            width: "100%",
+            paddingVertical: 10,
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "flex-end",
+          }}
+        >
+          <Image
+            source={Elephant}
+            style={{
+              height: 200,
+              width: 120,
+              borderRadius: 10,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: 30,
+              position: "absolute",
+              top: 0,
+              right: 0,
+              color: dark_gray,
+            }}
+          >
+            {users[0].flicks.find((flick) => flick.object === "Bike").points}
+            {"⭐"}
+          </Text>
+
+          <View
+            style={{
+                marginLeft: 10,
+                justifyContent: "center",
+                alignItems: "center"
+            }}
+          >
+            <Text
+                style={{
+                    fontSize: 70,
+                    color: secondary,
+                    fontWeight: "bold",
+                }}
+            >
+                {users[0].flicks.find((flick) => flick.object === "Elephant").minutes}
+                :
+                {users[0].flicks.find((flick) => flick.object === "Elephant").secondes}
+            </Text>
+            <Text
+                style={{
+                    fontSize: 50,
+                    color: dark_gray,
+                }}
+          >
+            {users[0].flicks.find((flick) => flick.object === "Elephant").object}
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 20,
+              color: gray,
+            }}
+          >
+            {
+              users[0].flicks.find((flick) => flick.object === "Elephant")
+                .heurespic
+            }
+            H
+            {
+              users[0].flicks.find((flick) => flick.object === "Elephant")
+                .minutespic
+            }{" "}
+            -
+            {
+              users[0].flicks.find((flick) => flick.object === "Elephant")
+                .datepic
+            }
+          </Text>
+        </View>
+          
+          
+          
+        </View>
         <View
           style={{
             width: "100%",
@@ -121,16 +203,7 @@ export default function LastFlick() {
           
           
         </View>
-        <View></View>
 
-        <Image
-          source={Bike}
-          style={{
-            height: 175,
-            width: 100,
-            borderRadius: 10,
-          }}
-        ></Image>
       </View>
       <View></View>
     </>
