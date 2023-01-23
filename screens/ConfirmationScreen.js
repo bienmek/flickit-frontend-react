@@ -1,22 +1,84 @@
 import {useObjectContext} from "../context/objectContext";
-import {Dimensions, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import TopTab from "../components/TopTab";
 import BottomTab from "../components/BottomTab";
-import FlickSubjectManager from "../components/FlickSubjectManager";
 import ObjectGradient from "../components/ObjectGradient";
 import {dark_gray, primary} from "../utils/colors";
 import {useState} from "react";
+import {useUserContext} from "../context/userContext";
+import axios from "axios";
+import {manipulateAsync, SaveFormat} from "expo-image-manipulator";
+import Loading from "../components/Loading";
+import {onValue, ref} from "firebase/database";
+import {db} from "../firebase";
+import ToasterContainer from "../components/Toasters/ToasterContainer";
+import {useDispatch} from "react-redux";
+import {showToaster} from "../redux/actions/toasterActions";
+import Bold from "../components/Utils/Bold";
 
 
 export default function ConfirmationScreen ({navigation}) {
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
+    const [loading, setLoading] = useState(false);
 
-    const {takenFlick, currentObject, timeTaken} = useObjectContext()
+    const {takenFlick, currentObject, timeTaken, setTakenFlick, setUpdateObjectContext} = useObjectContext()
+    const {setUpdateContext} = useUserContext()
+    const {user} = useUserContext()
+    const dispatch = useDispatch()
+
+    async function sendFlick () {
+        setLoading(true)
+        const headers = {
+            accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+        };
+
+        const image = await manipulateAsync(
+            takenFlick.uri,
+            [{ resize: { width: Number(takenFlick.width)/4, height: Number(takenFlick.height)/4 } }],
+            { format: SaveFormat.JPEG, compress: 0.8 }
+        );
+
+        const formData = new FormData();
+        formData.append('image', {
+            uri: image.uri,
+            type: 'image/jpeg',
+            name: 'image.jpeg'
+        });
+
+        const {data: {message: metadataId}} = await axios.post(`https://flick-it-take-data-4nyk6wb3ua-ew.a.run.app/v1/upload/${user.displayName}`, formData, {headers})
+        const docRef = ref(db, `/metadata/${metadataId}`)
+        onValue(docRef, (snapshot) => {
+            const doc = snapshot.toJSON()
+            if (doc.status === 1) {
+                setLoading(false)
+                navigation.navigate("Home")
+                dispatch(showToaster({
+                    type: "SUCCESS",
+                    text: `Great shot, flick validated +${doc.point}⭐`
+                }))
+                setUpdateContext(Date.now())
+                setUpdateObjectContext(Date.now())
+            } else if (doc.status === 2) {
+                setLoading(false)
+                setTakenFlick(null)
+                navigation.goBack()
+                dispatch(showToaster({
+                    type: "ERROR",
+                    text: `What is this flick ? You are supposed to take a ${doc.word}, try again`
+                }))
+            }
+        })
+
+    }
 
     return (
         <>
             <TopTab navigation={navigation} />
+            {loading && (
+                <Loading />
+            )}
             <ScrollView style={{backgroundColor: "white"}}>
 
                 <Title text={"The Object"} />
@@ -74,7 +136,7 @@ export default function ConfirmationScreen ({navigation}) {
                     onPress={() => navigation.navigate("ImageViewer", {routeImage: takenFlick})}
                 >
                     <Image
-                        source={{uri: takenFlick.uri}}
+                        source={{uri: takenFlick?.uri}}
                         style={{
                             height: 200,
                             width: "100%",
@@ -118,7 +180,7 @@ export default function ConfirmationScreen ({navigation}) {
                         marginTop: 50,
                         marginBottom: 100
                     }}
-
+                    onPress={sendFlick}
                     activeOpacity={0.7}
                 >
                     <Text
@@ -128,7 +190,7 @@ export default function ConfirmationScreen ({navigation}) {
                             fontSize: 30,
                         }}
                     >
-                        Send Flick !
+                        Send it
                     </Text>
 
                 </TouchableOpacity>

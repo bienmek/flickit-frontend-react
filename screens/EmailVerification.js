@@ -5,27 +5,37 @@ import {useUserContext} from "../context/userContext";
 import {db} from "../firebase";
 import TopTab from "../components/TopTab";
 import {primary} from "../utils/colors";
+import {useRegisterUser} from "../services/flickitApi";
+import axios from "axios"
 
 export default function EmailVerification({route, navigation}) {
     const {routeMail, routePassword} = route.params
     const [error, setError] = useState("");
-    const {loginUser, user, loading, setLoading, sendEmail, logoutUser} = useUserContext()
+    const {loginUser, loading, setLoading, sendEmail, logoutUser} = useUserContext()
 
-    const emailVerified = () => {
+    async function addUser (username, mail) {
+        const data = {
+            username,
+            mail
+        };
+
+        const headers = {
+            accept: 'application/json',
+            'Content-Type': 'application/json'
+        };
+
+        const response = await axios.post('https://flick-it-auth-4nyk6wb3ua-ew.a.run.app/v1/register', data, {headers})
+        console.log(response.data)
+    }
+
+    const emailVerified = async () => {
         setLoading(true)
         loginUser(routeMail, routePassword)
             .then(async (res) => {
                 if (res.user.emailVerified) {
                     logoutUser()
                     loginUser(routeMail, routePassword)
-                    // await setDoc(doc(db, "users", user.uid), {
-                    //     uid: user.uid,
-                    //     email: user.email,
-                    //     username: user.displayName,
-                    //     profile_picture: "https://firebasestorage.googleapis.com/v0/b/worldtask-test.appspot.com/o/profile_picture%2Fblank_pp.png?alt=media&token=0c6a438a-6dcf-4491-94d5-c1ee187e6c08",
-                    //     points: 0,
-                    //     flicks: [],
-                    // })
+                    await addUser(res.user.displayName, routeMail)
                 }
                 else {
                     setError("You need to verify your email address")

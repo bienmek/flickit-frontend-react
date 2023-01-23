@@ -4,6 +4,7 @@ import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import TakePictureLayout from "../components/TakePictureLayout";
 import PictureTakenLayout from "../components/PictureTakenLayout";
 import {useObjectContext} from "../context/objectContext";
+import ToasterContainer from "../components/Toasters/ToasterContainer";
 
 export default function CameraScreen ({navigation}) {
     const [type, setType] = useState(CameraType.back);
@@ -59,6 +60,7 @@ export default function CameraScreen ({navigation}) {
 
     return (
         <>
+            <ToasterContainer />
             <TouchableOpacity
                 style={styles.container}
                 activeOpacity={1}

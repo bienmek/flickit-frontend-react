@@ -12,12 +12,14 @@ import BottomTab from "../components/BottomTab";
 import TopTab from "../components/TopTab";
 import {useObjectContext} from "../context/objectContext";
 import {useUserContext} from "../context/userContext";
+import axios from "axios";
+import ToasterContainer from "../components/Toasters/ToasterContainer";
 
 export default function Home({navigation, route}) {
     const [handleEyes, setHandleEyes] = useState(eyes);
 
     const {currentObject, takenFlick} = useObjectContext()
-    const {user, logoutUser} = useUserContext()
+    const {user} = useUserContext()
 
     useEffect(() => {
         console.log("USERR", user?.email)
@@ -26,6 +28,7 @@ export default function Home({navigation, route}) {
     return (
         <>
             <TopTab navigation={navigation} />
+            <ToasterContainer />
             <SafeAreaView
                 style={{
                     width: "100%",
@@ -41,33 +44,6 @@ export default function Home({navigation, route}) {
                 ) : !takenFlick && (
                     <EyesRoutine handleEyes={handleEyes}/>
                 )}
-
-                <Text
-                    style={{
-                        color: primary,
-                        fontSize: 22,
-                        fontWeight: "bold"
-                    }}
-                >
-                    {user?.displayName}
-                </Text>
-
-                <TouchableOpacity
-                    style={{
-                        marginTop: 10
-                    }}
-                    onPress={() => logoutUser()}
-                >
-                    <Text
-                        style={{
-                            color: "red",
-                            fontSize: 22,
-                            fontWeight: "bold"
-                        }}
-                    >
-                        Se déconnecter
-                    </Text>
-                </TouchableOpacity>
             </SafeAreaView>
             <BottomTab navigation={navigation}/>
         </>

@@ -50,7 +50,6 @@ export const users = [
         username: "TitouXTv",
         email: "thibault.velly@isen.yncrea.fr",
         profile_picture: "../assets/images/titoux.jpeg",
-<<<<<<< HEAD
         points: 5000,
         numberofflicks: 30,
         averagetime: [
@@ -59,9 +58,6 @@ export const users = [
                 secondes: 10,
             }
         ],
-=======
-        points: 5050,
->>>>>>> 72a078a5ae308529e0fd64cc9102a7c56aabe58e
         flicks: [
             {
                 object: "Fire truck",

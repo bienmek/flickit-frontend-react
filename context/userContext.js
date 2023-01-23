@@ -11,6 +11,7 @@ import {
     sendEmailVerification
 } from "firebase/auth";
 import {collection, getDocs, query, where} from "firebase/firestore";
+import axios from "axios";
 
 const UserContext = createContext({})
 
@@ -21,12 +22,17 @@ export const UserContextProvider = ({children}) => {
     const [loading, setLoading] = useState(false);
     const [errorContext, setErrorContext] = useState("");
     const [updateContext, setUpdateContext] = useState(0);
+    const [authedUser, setAuthedUser] = useState(null);
 
     useEffect(() => {
         setLoading(true);
         return onAuthStateChanged(auth, (res) => {
             if (res) {
                 setUser(res);
+                getUserById(res.displayName)
+                    .then((res) => {
+                        setAuthedUser(res)
+                    })
             } else {
                 setUser(null);
             }
@@ -35,11 +41,28 @@ export const UserContextProvider = ({children}) => {
         });
     }, [updateContext]);
 
+    useEffect(() => {
+        console.log("SALUT MEC CA VA ?")
+        getUserById(user?.displayName)
+            .then((res) => {
+                setAuthedUser(res)
+            })
+    }, [updateContext,]);
+
+
+
+    async function getUserById (id) {
+        const headers = {
+            accept: 'application/json'
+        };
+        const response = await axios.get(`https://flick-it-auth-4nyk6wb3ua-ew.a.run.app/v1/users/${id}`, {headers})
+        return response.data
+    }
+
 
     const registerUser = async (username, email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
-
     }
 
     const loginUser = (email, password) => {
@@ -72,11 +95,12 @@ export const UserContextProvider = ({children}) => {
         setLoading,
         setUpdateContext,
         updateContext,
+        authedUser,
         registerUser,
         loginUser,
         logoutUser,
         forgotPassword,
-        sendEmail
+        sendEmail,
     }
 
     return (
