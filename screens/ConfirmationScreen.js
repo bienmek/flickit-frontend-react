@@ -1,4 +1,4 @@
-import {useObjectContext} from "../context/objectContext";
+import {useFlickContext} from "../context/flickContext";
 import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import TopTab from "../components/TopTab";
 import BottomTab from "../components/BottomTab";
@@ -12,9 +12,11 @@ import Loading from "../components/Loading";
 import {onValue, ref} from "firebase/database";
 import {db} from "../firebase";
 import ToasterContainer from "../components/Toasters/ToasterContainer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {showToaster} from "../redux/actions/toasterActions";
 import Bold from "../components/Utils/Bold";
+import {setCurrentObject, setHasUserTookCurrentObject} from "../redux/actions/objectActions";
+import {parser} from "../utils/functions";
 
 
 export default function ConfirmationScreen ({navigation}) {
@@ -22,9 +24,10 @@ export default function ConfirmationScreen ({navigation}) {
     const [width, setWidth] = useState(0);
     const [loading, setLoading] = useState(false);
 
-    const {takenFlick, currentObject, timeTaken, setTakenFlick, setUpdateObjectContext} = useObjectContext()
-    const {setUpdateContext} = useUserContext()
-    const {user} = useUserContext()
+    const {takenFlick, timeTaken, setTakenFlick,} = useFlickContext()
+    const {user, setUpdateContext} = useUserContext()
+
+    const object = useSelector((state) => state.object)
     const dispatch = useDispatch()
 
     async function sendFlick () {
@@ -52,14 +55,15 @@ export default function ConfirmationScreen ({navigation}) {
         onValue(docRef, (snapshot) => {
             const doc = snapshot.toJSON()
             if (doc.status === 1) {
-                setLoading(false)
+                dispatch(setHasUserTookCurrentObject(true))
+                dispatch(setCurrentObject(null))
                 navigation.navigate("Home")
                 dispatch(showToaster({
                     type: "SUCCESS",
                     text: `Great shot, flick validated +${doc.point}⭐`
                 }))
                 setUpdateContext(Date.now())
-                setUpdateObjectContext(Date.now())
+                setLoading(false)
             } else if (doc.status === 2) {
                 setLoading(false)
                 setTakenFlick(null)
@@ -97,7 +101,7 @@ export default function ConfirmationScreen ({navigation}) {
                 >
 
                     <ObjectGradient
-                        currentObject={currentObject}
+                        currentObject={parser(object?.currentObject)}
                         height={height}
                         width={width}
                     />
@@ -109,7 +113,7 @@ export default function ConfirmationScreen ({navigation}) {
                             fontWeight: "bold"
                         }}
                     >
-                        {currentObject?.name.toUpperCase()}
+                        {parser(object?.currentObject)?.name.toUpperCase()}
                     </Text>
                     <Text
                         style={{
@@ -117,7 +121,7 @@ export default function ConfirmationScreen ({navigation}) {
                             zIndex: 99
                         }}
                     >
-                        {currentObject?.image}
+                        {parser(object?.currentObject)?.image}
                     </Text>
                 </View>
 

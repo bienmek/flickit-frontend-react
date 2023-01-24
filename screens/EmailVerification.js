@@ -1,11 +1,8 @@
 import {ActivityIndicator, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {useEffect, useState} from "react";
-import {setDoc, doc} from "firebase/firestore"
+import {useState} from "react";
 import {useUserContext} from "../context/userContext";
-import {db} from "../firebase";
 import TopTab from "../components/TopTab";
 import {primary} from "../utils/colors";
-import {useRegisterUser} from "../services/flickitApi";
 import axios from "axios"
 
 export default function EmailVerification({route, navigation}) {
@@ -13,8 +10,9 @@ export default function EmailVerification({route, navigation}) {
     const [error, setError] = useState("");
     const {loginUser, loading, setLoading, sendEmail, logoutUser} = useUserContext()
 
-    async function addUser (username, mail) {
+    async function addUser (uid, username, mail) {
         const data = {
+            userid: uid,
             username,
             mail
         };
@@ -35,7 +33,7 @@ export default function EmailVerification({route, navigation}) {
                 if (res.user.emailVerified) {
                     logoutUser()
                     loginUser(routeMail, routePassword)
-                    await addUser(res.user.displayName, routeMail)
+                    await addUser(res.user.uid, res.user.displayName, routeMail)
                 }
                 else {
                     setError("You need to verify your email address")

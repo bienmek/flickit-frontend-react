@@ -8,13 +8,14 @@ import {gray, light_gray, primary} from "../utils/colors";
 import {useRoute} from "@react-navigation/native";
 import {useEffect} from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import {useObjectContext} from "../context/objectContext";
+import {useFlickContext} from "../context/flickContext";
+import {useSelector} from "react-redux";
 
 export default function BottomTab({navigation}) {
 
     const route = useRoute()
 
-    const {currentObject} = useObjectContext()
+    const object = useSelector((state) => state.object)
 
     useEffect(() => {
         console.log(route.name)
@@ -62,7 +63,7 @@ export default function BottomTab({navigation}) {
 
             </TouchableOpacity>
 
-            {(!!currentObject && route.name === "Home") && (
+            {(!!object.currentObject && route.name === "Home") && (
                 <View
                     style={{
                         position: "absolute",
@@ -92,7 +93,7 @@ export default function BottomTab({navigation}) {
                 }}
                 activeOpacity={0.7}
                 onPress={() => {
-                    if (!!currentObject && route.name === "Home") {
+                    if (!!object.currentObject && route.name === "Home") {
                         navigation.navigate("CameraScreen")
                     } else {
                         navigation.navigate("Home")
@@ -101,7 +102,7 @@ export default function BottomTab({navigation}) {
             >
                 <Image
                     source={
-                    !!currentObject && route.name === "Home" ? flickTime :
+                    !!object.currentObject && route.name === "Home" ? flickTime :
                         (route.name === "Home" || route.name === "ConfirmationScreen") ? home_black :
                             home
                     }

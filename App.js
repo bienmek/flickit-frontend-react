@@ -6,7 +6,6 @@ import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import Ranking from "./screens/Ranking";
 import CameraScreen from "./screens/CameraScreen"
-import ObjectContextProvider from "./context/objectContext";
 import Settings from "./screens/Settings";
 import ConfirmationScreen from "./screens/ConfirmationScreen";
 import ImageViewer from "./screens/ImageViewer";
@@ -18,6 +17,7 @@ import {UserContextProvider} from "./context/userContext";
 import EmailVerification from "./screens/EmailVerification";
 import {store} from "./redux/store";
 import {Provider} from "react-redux";
+import FlickContextProvider from "./context/flickContext";
 
 const Stack = createStackNavigator()
 
@@ -48,8 +48,8 @@ export default function App() {
         return (
             <NavigationContainer>
                 <UserContextProvider>
-                    <ObjectContextProvider>
-                        <Provider store={store}>
+                    <Provider store={store}>
+                        <FlickContextProvider>
                             <Stack.Navigator initialRouteName={"Home"}>
                                 <Stack.Screen name={"Home"} component={Home} options={{animationEnabled: false, headerShown: false}}/>
                                 <Stack.Screen name={"Profile"} component={Profile} options={{animationEnabled: false, headerShown: false}}/>
@@ -59,8 +59,8 @@ export default function App() {
                                 <Stack.Screen name={"ImageViewer"} component={ImageViewer} options={{headerShown: false}}/>
                                 <Stack.Screen name={"Settings"} component={Settings} options={{headerShown: false}}/>
                             </Stack.Navigator>
-                        </Provider>
-                    </ObjectContextProvider>
+                        </FlickContextProvider>
+                    </Provider>
                 </UserContextProvider>
             </NavigationContainer>
         )

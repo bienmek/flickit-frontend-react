@@ -2,7 +2,7 @@ import {Dimensions, Image, Text, TouchableOpacity, View} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {primary} from "../utils/colors";
 import Feather from "react-native-vector-icons/Feather";
-import {useObjectContext} from "../context/objectContext";
+import {useFlickContext} from "../context/flickContext";
 
 
 export default function PictureTakenLayout({flick, deleteFlick, isFrontCamera, navigation}) {
@@ -12,7 +12,7 @@ export default function PictureTakenLayout({flick, deleteFlick, isFrontCamera, n
     const {
         setTakenFlick,
         computeTimeTaken
-    } = useObjectContext()
+    } = useFlickContext()
 
     function isImagePortrait () {
         return flick.height > flick.width

@@ -3,7 +3,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import {CameraType, FlashMode} from "expo-camera";
 import {dark_gray, gray, primary} from "../utils/colors";
 import {useEffect, useState} from "react";
-import {useObjectContext} from "../context/objectContext";
+import {useFlickContext} from "../context/flickContext";
 import Svg, {Defs, Ellipse, RadialGradient, Stop} from "react-native-svg";
 import ObjectGradient from "./ObjectGradient";
 import Feather from "react-native-vector-icons/Feather";

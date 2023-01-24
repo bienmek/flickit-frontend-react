@@ -19,193 +19,106 @@ const Bike = require("../assets/images/bike.jpeg");
 
 export default function LastFlick() {
   return (
-    <>
-      <View
-        style={{
-          width: "100%",
-          flexDirection: "col",
-          justifyContent: "flex-start",
-          paddingHorizontal: 10,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 40,
-            paddingStart: 5,
-            color: primary,
-            fontWeight: "bold",
-          }}
-        >
-          Last Flicks
-        </Text>
-        <View
-          style={{
-            width: "100%",
-            paddingVertical: 10,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "flex-end",
-          }}
-        >
-          <Image
-            source={Elephant}
-            style={{
-              height: 200,
-              width: 120,
-              borderRadius: 10,
-            }}
-          />
-          <Text
-            style={{
-              fontSize: 30,
-              position: "absolute",
-              top: 0,
-              right: 0,
-              color: dark_gray,
-            }}
-          >
-            {users[0].flicks.find((flick) => flick.object === "Bike").points}
-            {"⭐"}
-          </Text>
-
+      <>
           <View
             style={{
-                marginLeft: 10,
-                justifyContent: "center",
-                alignItems: "center"
+              width: "100%",
+              flexDirection: "col",
+              justifyContent: "flex-start",
+              paddingHorizontal: 10,
             }}
           >
-            <Text
-                style={{
-                    fontSize: 70,
-                    color: secondary,
+              <Text
+                  style={{
+                    fontSize: 40,
+                    paddingStart: 5,
+                    color: primary,
                     fontWeight: "bold",
-                }}
-            >
-                {users[0].flicks.find((flick) => flick.object === "Elephant").minutes}
-                :
-                {users[0].flicks.find((flick) => flick.object === "Elephant").secondes}
-            </Text>
-            <Text
-                style={{
-                    fontSize: 50,
-                    color: dark_gray,
-                }}
-          >
-            {users[0].flicks.find((flick) => flick.object === "Elephant").object}
-          </Text>
+                  }}
+              >
+                Last Flicks
+              </Text>
+                <View
+                  style={{
+                    width: "100%",
+                    paddingVertical: 10,
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <Image
+                    source={Elephant}
+                    style={{
+                      height: 200,
+                      width: 120,
+                      borderRadius: 10,
+                    }}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 30,
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      color: dark_gray,
+                    }}
+                  >
+                    {users[0].flicks.find((flick) => flick.object === "Bike").points}
+                    {"⭐"}
+                  </Text>
 
-          <Text
-            style={{
-              fontSize: 20,
-              color: gray,
-            }}
-          >
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .heurespic
-            }
-            H
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .minutespic
-            }{" "}
-            -
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .datepic
-            }
-          </Text>
-        </View>
-          
-          
-          
-        </View>
-        <View
-          style={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "flex-end",
-          }}
-        >
-          <Image
-            source={Elephant}
-            style={{
-              height: 200,
-              width: 120,
-              borderRadius: 10,
-            }}
-          />
-          <Text
-            style={{
-              fontSize: 30,
-              position: "absolute",
-              top: 0,
-              right: 0,
-              color: dark_gray,
-            }}
-          >
-            {users[0].flicks.find((flick) => flick.object === "Bike").points}
-            {"⭐"}
-          </Text>
+                  <View
+                    style={{
+                        marginLeft: 10,
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                  >
+                    <Text
+                        style={{
+                            fontSize: 70,
+                            color: secondary,
+                            fontWeight: "bold",
+                        }}
+                    >
+                        {users[0].flicks.find((flick) => flick.object === "Elephant").minutes}
+                        :
+                        {users[0].flicks.find((flick) => flick.object === "Elephant").secondes}
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 50,
+                            color: dark_gray,
+                        }}
+                  >
+                    {users[0].flicks.find((flick) => flick.object === "Elephant").object}
+                  </Text>
 
-          <View
-            style={{
-                marginLeft: 10,
-                justifyContent: "center",
-                alignItems: "center"
-            }}
-          >
-            <Text
-                style={{
-                    fontSize: 70,
-                    color: secondary,
-                    fontWeight: "bold",
-                }}
-            >
-                {users[0].flicks.find((flick) => flick.object === "Elephant").minutes}
-                :
-                {users[0].flicks.find((flick) => flick.object === "Elephant").secondes}
-            </Text>
-            <Text
-                style={{
-                    fontSize: 50,
-                    color: dark_gray,
-                }}
-          >
-            {users[0].flicks.find((flick) => flick.object === "Elephant").object}
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 20,
-              color: gray,
-            }}
-          >
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .heurespic
-            }
-            H
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .minutespic
-            }{" "}
-            -
-            {
-              users[0].flicks.find((flick) => flick.object === "Elephant")
-                .datepic
-            }
-          </Text>
-        </View>
-          
-          
-          
-        </View>
-
-      </View>
-      <View></View>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      color: gray,
+                    }}
+                  >
+                    {
+                      users[0].flicks.find((flick) => flick.object === "Elephant")
+                        .heurespic
+                    }
+                    H
+                    {
+                      users[0].flicks.find((flick) => flick.object === "Elephant")
+                        .minutespic
+                    }{" "}
+                    -
+                    {
+                      users[0].flicks.find((flick) => flick.object === "Elephant")
+                        .datepic
+                    }
+                  </Text>
+                </View>
+            </View>
+          </View>
     </>
   );
 }

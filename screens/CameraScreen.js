@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from 'react';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import TakePictureLayout from "../components/TakePictureLayout";
 import PictureTakenLayout from "../components/PictureTakenLayout";
-import {useObjectContext} from "../context/objectContext";
+import {useFlickContext} from "../context/flickContext";
 import ToasterContainer from "../components/Toasters/ToasterContainer";
 
 export default function CameraScreen ({navigation}) {

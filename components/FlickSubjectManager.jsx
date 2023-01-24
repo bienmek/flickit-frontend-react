@@ -1,15 +1,11 @@
 import {SafeAreaView, Text, View} from "react-native";
 import {dark_gray, primary} from "../utils/colors";
 import {useState} from "react";
-import {useObjectContext} from "../context/objectContext";
 import ObjectGradient from "./ObjectGradient";
 
-
-export default function FlickSubjectManager () {
+export default function FlickSubjectManager ({currentObject, timeLeft}) {
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
-
-    const {currentObject, timeLeft} = useObjectContext()
 
     return (
         <SafeAreaView
@@ -56,7 +52,7 @@ export default function FlickSubjectManager () {
                     zIndex: 99,
                 }}
             >
-                {timeLeft.hours > 0 && `${timeLeft.hours}h`} {timeLeft.minutes.toString().length < 2 ? `0${timeLeft.minutes}m` : `${timeLeft.minutes}m`} {timeLeft.seconds.toString().length < 2 ? `0${timeLeft.seconds}s` : `${timeLeft.seconds}s`}
+                {timeLeft?.hours > 0 && `${timeLeft?.hours}h`} {timeLeft?.minutes.toString().length < 2 ? `0${timeLeft?.minutes}m` : `${timeLeft?.minutes}m`} {timeLeft?.seconds.toString().length < 2 ? `0${timeLeft?.seconds}s` : `${timeLeft?.seconds}s`}
             </Text>
 
             <View

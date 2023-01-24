@@ -29,7 +29,7 @@ export const UserContextProvider = ({children}) => {
         return onAuthStateChanged(auth, (res) => {
             if (res) {
                 setUser(res);
-                getUserById(res.displayName)
+                getUserById(res?.uid)
                     .then((res) => {
                         setAuthedUser(res)
                     })
@@ -42,8 +42,7 @@ export const UserContextProvider = ({children}) => {
     }, [updateContext]);
 
     useEffect(() => {
-        console.log("SALUT MEC CA VA ?")
-        getUserById(user?.displayName)
+        getUserById(user?.uid)
             .then((res) => {
                 setAuthedUser(res)
             })
@@ -51,11 +50,11 @@ export const UserContextProvider = ({children}) => {
 
 
 
-    async function getUserById (id) {
+    async function getUserById (uid) {
         const headers = {
             accept: 'application/json'
         };
-        const response = await axios.get(`https://flick-it-auth-4nyk6wb3ua-ew.a.run.app/v1/users/${id}`, {headers})
+        const response = await axios.get(`https://flick-it-auth-4nyk6wb3ua-ew.a.run.app/v1/users/${uid}`, {headers})
         return response.data
     }
 

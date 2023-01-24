@@ -10,7 +10,7 @@ import {useUserContext} from "../context/userContext";
 export default function TopTab({navigation}) {
 
     const route = useRoute()
-    const {authedUser} = useUserContext()
+    const {authedUser, user} = useUserContext()
 
     return (
         <>
@@ -56,46 +56,48 @@ export default function TopTab({navigation}) {
                     {(route.name !== "Register" && route.name !== "Login") ? (
                         <>
                             <View style={{flex: 1}}></View>
-                            <View
-                                style={{
-                                    position: "absolute",
-                                    borderRadius: 20,
-                                    borderWidth: 1,
-                                    borderColor: "black",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    paddingHorizontal: 5,
-                                    paddingVertical: 7,
-                                    right: 10,
-                                    width: 90,
-                                    overflow: "hidden",
-                                    bottom: 5
-                                }}
-                            >
+                            {user?.emailVerified && (
+                                <View
+                                    style={{
+                                        position: "absolute",
+                                        borderRadius: 20,
+                                        borderWidth: 1,
+                                        borderColor: "black",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                        paddingHorizontal: 5,
+                                        paddingVertical: 7,
+                                        right: 10,
+                                        width: 90,
+                                        overflow: "hidden",
+                                        bottom: 5
+                                    }}
+                                >
 
-                                <View>
-                                    <Text
-                                        style={{
-                                            fontSize: 18
-                                        }}
-                                    >
-                                        {"⭐"}
-                                    </Text>
-                                </View>
+                                    <View>
+                                        <Text
+                                            style={{
+                                                fontSize: 18
+                                            }}
+                                        >
+                                            {"⭐"}
+                                        </Text>
+                                    </View>
 
-                                <View>
-                                    <Text
-                                        style={{
-                                            fontSize: 15,
-                                            color: "black",
-                                            fontWeight: "bold"
-                                        }}
-                                    >
-                                        {authedUser?.totalPoint}
-                                    </Text>
+                                    <View>
+                                        <Text
+                                            style={{
+                                                fontSize: 15,
+                                                color: "black",
+                                                fontWeight: "bold"
+                                            }}
+                                        >
+                                            {authedUser?.totalPoint}
+                                        </Text>
+                                    </View>
                                 </View>
-                            </View>
+                            )}
                         </>
                     ) : (<View style={{flex: 1}}></View>)}
                 </View>

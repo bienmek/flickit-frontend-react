@@ -2,7 +2,6 @@ import {getAuth} from "firebase/auth";
 import {initializeApp} from "firebase/app";
 import {getDatabase} from "firebase/database"
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyBxs5wngIU3sV17hQzZhDJJq9qVqfuuFxw",
     authDomain: "flick-it-373707.firebaseapp.com",
