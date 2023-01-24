@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, Text, TouchableOpacity } from "react-native";
 import { users } from "../samples/flick-object-sample";
 import MyButton from "../components/MyButton";
+import { useUserContext } from "../context/userContext";
 import {
   dark_gray,
   gray,
@@ -16,6 +17,7 @@ import {
 const EditProfile = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const { user, logoutUser } = useUserContext();
 
   return (
     <View
@@ -37,7 +39,7 @@ const EditProfile = () => {
       </Text>
       <TextInput
         style={{
-          color: primary,
+          color: "black",
           fontSize: 26,
           fontWeight: "bold",
           borderBottomWidth: 1,
@@ -60,8 +62,8 @@ const EditProfile = () => {
       </Text>
       <TextInput
         style={{
-          fontSize: 20,
-          color: primary,
+          fontSize: 26,
+          color: "black",
           fontWeight: "bold",
           borderBottomWidth: 1,
           borderColor: "lightgray",
@@ -72,14 +74,56 @@ const EditProfile = () => {
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
+
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: "col",
           paddingTop: 20,
         }}
       >
-        <MyButton title="Logout" onPress={() => console.log("User @ logout")} />
-        <MyButton title="Save" onPress={() => console.log("Settings saved")} />
+        <TouchableOpacity style={{}} onPress={() => logoutUser()}>
+          <Text
+            style={{
+              color: primary,
+              fontSize: 22,
+              fontWeight: "bold",
+            }}
+          >
+            Change password
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            marginTop: 10,
+          }}
+          //onPress={() => }
+        >
+          <Text
+            style={{
+              color: "red",
+              fontSize: 22,
+              fontWeight: "bold",
+            }}
+          >
+            Logout
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            marginTop: 10,
+          }}
+          //onPress={() => }
+        >
+          <Text
+            style={{
+              color: "blue",
+              fontSize: 22,
+              fontWeight: "bold",
+            }}
+          >
+            Save
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

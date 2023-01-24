@@ -58,6 +58,7 @@ export const users = [
                 secondes: 10,
             }
         ],
+        points: 5050,
         flicks: [
             {
                 object: "Fire truck",
