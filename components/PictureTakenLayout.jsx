@@ -109,7 +109,7 @@ export default function PictureTakenLayout({flick, deleteFlick, isFrontCamera, n
                         fontWeight: "bold"
                     }}
                 >
-                    Send
+                    Next
                 </Text>
 
                 <Feather

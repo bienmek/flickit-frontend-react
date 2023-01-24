@@ -1,7 +1,6 @@
-import {SafeAreaView, Text, View, StyleSheet, Dimensions} from "react-native";
-import {dark_gray, gray, legendary, light_gray, primary, rare, secondary, super_rare} from "../utils/colors";
-import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
-import {useEffect, useState} from "react";
+import {SafeAreaView, Text, View} from "react-native";
+import {dark_gray, primary} from "../utils/colors";
+import {useState} from "react";
 import {useObjectContext} from "../context/objectContext";
 import ObjectGradient from "./ObjectGradient";
 
@@ -10,7 +9,7 @@ export default function FlickSubjectManager () {
     const [height, setHeight] = useState(0);
     const [width, setWidth] = useState(0);
 
-    const {currentObject, timeLeft, setStartTime} = useObjectContext()
+    const {currentObject, timeLeft} = useObjectContext()
 
     return (
         <SafeAreaView
@@ -23,7 +22,6 @@ export default function FlickSubjectManager () {
             onLayout={(event) => {
                 setHeight(event.nativeEvent.layout.height)
                 setWidth(event.nativeEvent.layout.width)
-                setStartTime(Date.now())
             }}
         >
 

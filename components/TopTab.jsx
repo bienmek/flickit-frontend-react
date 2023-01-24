@@ -5,10 +5,12 @@ import {useEffect, useState} from "react";
 import {useRoute} from "@react-navigation/native";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {users} from "../samples/flick-object-sample";
+import {useUserContext} from "../context/userContext";
 
 export default function TopTab({navigation}) {
 
     const route = useRoute()
+    const {authedUser} = useUserContext()
 
     return (
         <>
@@ -90,7 +92,7 @@ export default function TopTab({navigation}) {
                                             fontWeight: "bold"
                                         }}
                                     >
-                                        {users[0].points}
+                                        {authedUser?.totalPoint}
                                     </Text>
                                 </View>
                             </View>

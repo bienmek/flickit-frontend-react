@@ -45,7 +45,7 @@ export default function Register({navigation}) {
                     handleCodeInApp: true,
                     url: "https://flick-it-373707.firebaseapp.com"
                 })
-                    .then(() => navigation.navigate("EmailVerification", {routeMail: email, routePassword: password}))
+                    .then(() => navigation.navigate("EmailVerification", {routeUser: username, routeMail: email, routePassword: password}))
             })
             .catch(() => setError("The email is already use by an other user"))
             .finally(() => setLoading(false));

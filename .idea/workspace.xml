@@ -5,25 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3f5fcb4-d567-45ec-a647-7c54146708d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/Loading.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/context/userContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/firebase/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/EmailVerification.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/ImageViewer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Toasters/ErrorToaster.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Toasters/LoadingToaster.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Toasters/SuccessToaster.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Toasters/ToasterContainer.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Utils/Bold.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Utils/Loading.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Utils/LoadingBar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/Utils/SearchBar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase/functions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/actions/toasterActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/slices/toasterSlice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/redux/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/flickitApi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/BottomTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/BottomTab.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/FlickSubjectManager.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/FlickSubjectManager.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/PictureTakenLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/PictureTakenLayout.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/TopTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/TopTab.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/context/objectContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/objectContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/userContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/userContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/firebase/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/samples/flick-object-sample.js" beforeDir="false" afterPath="$PROJECT_DIR$/samples/flick-object-sample.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/CameraScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/CameraScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/ConfirmationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ConfirmationScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EmailVerification.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EmailVerification.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +68,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/ugo/Documents/Projects/WorldTask/mobile-app/WorldTask-v0.1",
+    "last_opened_file_path": "/home/ugo/Documents/Projects/WorldTask/mobile-app/WorldTask-v0.1/context/userContext.js",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,8 +81,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/components" />
-      <recent name="$PROJECT_DIR$/context" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/context" />
       <recent name="$PROJECT_DIR$/assets/images" />
       <recent name="C:\Users\ugocm\Documents\GitHub\flickit-frontend-react\assets" />
     </key>
@@ -99,6 +110,8 @@
       <workItem from="1673428378718" duration="17862000" />
       <workItem from="1673852737182" duration="22339000" />
       <workItem from="1673938341955" duration="11780000" />
+      <workItem from="1674287095350" duration="11312000" />
+      <workItem from="1674383725036" duration="28499000" />
     </task>
     <servers />
   </component>

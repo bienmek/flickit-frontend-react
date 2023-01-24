@@ -16,6 +16,8 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "./firebase";
 import {UserContextProvider} from "./context/userContext";
 import EmailVerification from "./screens/EmailVerification";
+import {store} from "./redux/store";
+import {Provider} from "react-redux";
 
 const Stack = createStackNavigator()
 
@@ -45,19 +47,21 @@ export default function App() {
     if (user) {
         return (
             <NavigationContainer>
-                <ObjectContextProvider>
-                    <UserContextProvider>
-                        <Stack.Navigator initialRouteName={"Home"}>
-                            <Stack.Screen name={"Home"} component={Home} options={{animationEnabled: false, headerShown: false}}/>
-                            <Stack.Screen name={"Profile"} component={Profile} options={{animationEnabled: false, headerShown: false}}/>
-                            <Stack.Screen name={"Ranking"} component={Ranking} options={{animationEnabled: false, headerShown: false}}/>
-                            <Stack.Screen name={"CameraScreen"} component={CameraScreen} options={{animationEnabled: false, headerShown: false}}/>
-                            <Stack.Screen name={"ConfirmationScreen"} component={ConfirmationScreen} options={{headerShown: false}}/>
-                            <Stack.Screen name={"ImageViewer"} component={ImageViewer} options={{headerShown: false}}/>
-                            <Stack.Screen name={"Settings"} component={Settings} options={{headerShown: false}}/>
-                        </Stack.Navigator>
-                    </UserContextProvider>
-                </ObjectContextProvider>
+                <UserContextProvider>
+                    <ObjectContextProvider>
+                        <Provider store={store}>
+                            <Stack.Navigator initialRouteName={"Home"}>
+                                <Stack.Screen name={"Home"} component={Home} options={{animationEnabled: false, headerShown: false}}/>
+                                <Stack.Screen name={"Profile"} component={Profile} options={{animationEnabled: false, headerShown: false}}/>
+                                <Stack.Screen name={"Ranking"} component={Ranking} options={{animationEnabled: false, headerShown: false}}/>
+                                <Stack.Screen name={"CameraScreen"} component={CameraScreen} options={{animationEnabled: false, headerShown: false}}/>
+                                <Stack.Screen name={"ConfirmationScreen"} component={ConfirmationScreen} options={{headerShown: false}}/>
+                                <Stack.Screen name={"ImageViewer"} component={ImageViewer} options={{headerShown: false}}/>
+                                <Stack.Screen name={"Settings"} component={Settings} options={{headerShown: false}}/>
+                            </Stack.Navigator>
+                        </Provider>
+                    </ObjectContextProvider>
+                </UserContextProvider>
             </NavigationContainer>
         )
     }
@@ -73,5 +77,4 @@ export default function App() {
             </UserContextProvider>
         </NavigationContainer>
   )
-
 }
