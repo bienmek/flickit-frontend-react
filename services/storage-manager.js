@@ -46,7 +46,7 @@ export async function setAuthedUserStorage (uid, notificationsFrequency, lastFli
         } else {
             storageData = {
                 notificationHoursList: getNotificationInterval(notificationsFrequency),
-                lastFlicks: userStorage.lastFlicks,
+                lastFlicks: [],
                 profilePicture: profilePicture
             }
             console.log("DEBUG3")

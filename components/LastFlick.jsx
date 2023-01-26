@@ -47,7 +47,6 @@ export default function LastFlick() {
         getAuthedUserStorage(user?.uid)
             .then((res) => {
                 setLastFlicks(res.lastFlicks)
-                console.log(res.lastFlicks[0].flickImage)
             })
     }, [updateContext]);
 
@@ -75,7 +74,7 @@ export default function LastFlick() {
                       <View
                           style={{
                               width: "100%",
-                              paddingVertical: 10,
+                              paddingVertical: 30,
                               flexDirection: "row",
                               justifyContent: "flex-start",
                               alignItems: "flex-end",
@@ -117,7 +116,7 @@ export default function LastFlick() {
                           >
                               <Text
                                   style={{
-                                      fontSize: 70,
+                                      fontSize: 60,
                                       color: secondary,
                                       fontWeight: "bold",
                                   }}
