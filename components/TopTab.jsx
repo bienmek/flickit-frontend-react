@@ -41,7 +41,7 @@ export default function TopTab({navigation}) {
                             height: 50,
                         }}
                         activeOpacity={1}
-                        onPress={() => navigation.navigate("Home")}
+                        onPress={() => route.name !== "Settings" && navigation.navigate("Home")}
                     >
                         <Image
                             source={logo}

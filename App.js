@@ -18,17 +18,26 @@ import EmailVerification from "./screens/EmailVerification";
 import {store} from "./redux/store";
 import {Provider} from "react-redux";
 import FlickContextProvider from "./context/flickContext";
+import {getAuthedUserStorage} from "./services/storage-manager";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator()
 
 export default function App() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [displaySettingPage, setDisplaySettingPage] = useState(false);
+
+    async function isUserFirstLogin (uid) {
+        const storage =  await getAuthedUserStorage(uid)
+        setDisplaySettingPage(!storage)
+    }
 
     useEffect(() => {
-        onAuthStateChanged(auth, (res) => {
+        onAuthStateChanged(auth, async (res) => {
             if (res?.emailVerified) {
                 setUser(res)
+                await isUserFirstLogin(res.uid)
                 setLoading(false)
             } else {
                 setUser(null)
@@ -41,6 +50,20 @@ export default function App() {
     if (loading) {
         return (
             <Loading />
+        )
+    }
+
+    if (user && displaySettingPage) {
+        return (
+            <NavigationContainer>
+                <UserContextProvider>
+                    <Provider store={store}>
+                        <Stack.Navigator initialRouteName={"Register"}>
+                            <Stack.Screen name={"Settings"} component={Settings} options={{headerShown: false}}/>
+                        </Stack.Navigator>
+                    </Provider>
+                </UserContextProvider>
+            </NavigationContainer>
         )
     }
 

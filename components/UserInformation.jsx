@@ -10,19 +10,25 @@ import {
   super_rare,
 } from "../utils/colors";
 import { users } from "../samples/flick-object-sample";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Image } from "react-native";
 import { TouchableOpacity } from "react-native";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import {useUserContext} from "../context/userContext";
-
-const Profil = require("../assets/images/titoux.jpeg");
+import {getAuthedUserStorage} from "../services/storage-manager";
 const Settings = require("../assets/images/settings.png");
 
 export default function UserInformation() {
+    const [profilePicture, setProfilePicture] = useState("https://firebasestorage.googleapis.com/v0/b/worldtask-test.appspot.com/o/profile_picture%2Fblank_pp.png?alt=media&token=0c6a438a-6dcf-4491-94d5-c1ee187e6c08");
 
     const navigation = useNavigation()
-    const {authedUser} = useUserContext()
+    const {authedUser, user, updateContext} = useUserContext()
+
+    useEffect(() => {
+        getAuthedUserStorage(user?.uid)
+            .then((res) => setProfilePicture(res.profilePicture))
+    }, [updateContext]);
+
 
     return (
         <View
@@ -35,15 +41,18 @@ export default function UserInformation() {
             paddingVertical: 20,
           }}
         >
-          <Image
-            source={Profil}
-            style={{
-              height: 80,
-              width: 80,
-              borderRadius: 50,
-            }}
-          >
-          </Image>
+        <TouchableOpacity
+            onPress={() => navigation.navigate("ImageViewer", {routeImage: {uri: profilePicture}})}
+        >
+              <Image
+                source={{uri: profilePicture}}
+                style={{
+                  height: 80,
+                  width: 80,
+                  borderRadius: 50,
+                }}
+              />
+        </TouchableOpacity>
           <View>
             <Text
               style={{
@@ -57,14 +66,13 @@ export default function UserInformation() {
             </Text>
             <Text
               style={{
-                fontSize: 10,
-                paddingTop: 10,
+                fontSize: 13,
                 paddingStart: 20,
                 color: dark_gray,
                 fontWeight: "bold",
               }}
             >
-              @{authedUser.mail}
+              {authedUser.mail}
             </Text>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>

@@ -14,63 +14,69 @@ import {useUserContext} from "../context/userContext";
 import ToasterContainer from "../components/Toasters/ToasterContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {computeHasUserTookCurrentObject, objectRoutine} from "../redux/actions/objectActions";
-import {delay, parser} from "../utils/functions";
+import {
+    delay,
+    findClosestNumber,
+    findExactOrSmallerNumber,
+    findNextHigherNumber,
+    findSmallerNumber,
+    parser
+} from "../utils/functions";
+import {getAuthedUserStorage} from "../services/storage-manager";
+import CountDown from "../components/CountDown";
 
 export default function Home({navigation, route}) {
     const [update, setUpdate] = useState(0);
+    const [displaySettingPage, setDisplaySettingPage] = useState(false);
+    const [animatedEye, setAnimatedEye] = useState(sleep);
 
     const {user} = useUserContext()
 
     const object = useSelector((state) => state.object)
     const dispatch = useDispatch()
 
-    function handleEyes () {
+    async function handleEyes () {
         const NOW = new Date(Date.now())
-        const hoursListNotifications = [6, 18, 24]
-        let nextHour
+        const authedUserStorage = await getAuthedUserStorage(user.uid)
+        const hoursListNotifications = authedUserStorage.notificationHoursList
+        const previous = findSmallerNumber(hoursListNotifications, NOW.getHours())
+        const next = findNextHigherNumber(hoursListNotifications, NOW.getHours())
+        const TIME_FROM_HOUR_SHARP = new Date(((NOW.getTime() - 1000*60*NOW.getMinutes()) - 1000*NOW.getSeconds()) - NOW.getMilliseconds())
+        const diffPrev = new Date(TIME_FROM_HOUR_SHARP.getTime() - (TIME_FROM_HOUR_SHARP.getHours()*3600*1000 - previous*3600*1000)+3600*1000)
+        const diffNext = new Date(TIME_FROM_HOUR_SHARP.getTime() + (next*3600*1000 - TIME_FROM_HOUR_SHARP.getHours()*3600*1000)+3600*1000)
+        const proportion =  ((NOW - diffPrev) / (diffNext - diffPrev)) > 0 ? ((NOW - diffPrev) / (diffNext - diffPrev)) : 1 - Math.abs((NOW - diffPrev) / (diffNext - diffPrev))
 
-        let timeLeft = {
-            hours: 0,
-            minutes: 0,
-            seconds: 0
+        if (proportion >= 0.75) {
+            setAnimatedEye(eyes)
+        } else if (proportion >= 0.5) {
+            setAnimatedEye(wokup)
+        } else if (proportion >= 0.25) {
+            setAnimatedEye(sleepy)
+        } else {
+            setAnimatedEye(sleep)
         }
-
-        for (let i = 0; i < hoursListNotifications.length; i++) {
-            if (hoursListNotifications[i] > NOW.getHours()) {
-                nextHour = hoursListNotifications[i]
-                break;
-            }
-        }
-
-        if (nextHour === 0) {
-            nextHour = hoursListNotifications[0]
-        }
-
-        timeLeft.hours = nextHour - NOW.getHours()
-        if (timeLeft.hours < 0) {
-            timeLeft.hours += 24
-        }
-        timeLeft.minutes = 60 - NOW.getMinutes()
-        timeLeft.seconds = 60 - NOW.getSeconds()
-
-        const nextTime = new Date(NOW.getTime() + (timeLeft.hours * 60 * 60 * 1000) + (timeLeft.minutes * 60 * 1000) + (timeLeft.seconds * 1000))
-        console.log(nextTime.getMinutes())
-
-        return wokup
     }
 
     useEffect(() => {
-        //computeHasUserTookCurrentObject(dispatch, user?.uid)
-        objectRoutine(dispatch, user?.uid, object.currentObject, object.hasUserTookCurrentObject)
-            .then(() =>
-                delay(1000)
-                    .then(() => setUpdate(update+1)))
-    }, [update])
+        if (user) {
+            handleEyes()
+            computeHasUserTookCurrentObject(dispatch, user?.uid)
+            objectRoutine(dispatch, user?.uid, object.currentObject, object.hasUserTookCurrentObject, navigation)
+                .then(() =>
+                    delay(1000)
+                        .then(() => setUpdate(update+1)))
+        } else {
+            setUpdate(update+1)
+        }
+    }, [update,])
 
     return (
         <>
             <TopTab navigation={navigation} />
             <ToasterContainer />
+            {object.isCountDown && (
+                <CountDown />
+            )}
             <SafeAreaView
                 style={{
                     width: "100%",
@@ -84,7 +90,7 @@ export default function Home({navigation, route}) {
                 {object.currentObject !== null ? (
                     <FlickSubjectManager currentObject={parser(object.currentObject)} timeLeft={parser(object.timeLeft)}/>
                 ) : (
-                    <EyesRoutine handleEyes={handleEyes()}/>
+                    <EyesRoutine handleEyes={animatedEye}/>
                 )}
             </SafeAreaView>
             <BottomTab navigation={navigation}/>

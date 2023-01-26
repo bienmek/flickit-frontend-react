@@ -5,12 +5,14 @@ import BottomTab from "../components/BottomTab";
 import TopTab from "../components/TopTab";
 import UserInformation from "../components/UserInformation";
 import LastFlick from "../components/LastFlick";
+import ToasterContainer from "../components/Toasters/ToasterContainer";
 
 
 export default function Profile ({navigation}) {
     return (
         <>
             <TopTab navigation={navigation} />
+            <ToasterContainer />
             <ScrollView
                 style={{
                     backgroundColor: "white"

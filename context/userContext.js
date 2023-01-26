@@ -1,16 +1,13 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {auth, db} from "../firebase";
-
+import {auth} from "../firebase";
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signOut,
-    updateProfile,
     sendEmailVerification
 } from "firebase/auth";
-import {collection, getDocs, query, where} from "firebase/firestore";
 import axios from "axios";
 
 const UserContext = createContext({})
@@ -39,13 +36,15 @@ export const UserContextProvider = ({children}) => {
             setErrorContext("")
             setLoading(false);
         });
-    }, [updateContext]);
+    }, [updateContext,]);
 
     useEffect(() => {
-        getUserById(user?.uid)
-            .then((res) => {
-                setAuthedUser(res)
-            })
+        if (user) {
+            getUserById(user?.uid)
+                .then((res) => {
+                    setAuthedUser(res)
+                })
+        }
     }, [updateContext,]);
 
 
@@ -57,7 +56,6 @@ export const UserContextProvider = ({children}) => {
         const response = await axios.get(`https://flick-it-auth-4nyk6wb3ua-ew.a.run.app/v1/users/${uid}`, {headers})
         return response.data
     }
-
 
     const registerUser = async (username, email, password) => {
         setLoading(true);

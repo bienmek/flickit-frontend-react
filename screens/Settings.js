@@ -1,35 +1,21 @@
-import {ScrollView, View, Text, Image, SafeAreaView} from "react-native";
-import {useEffect, useState} from "react";
-import {users} from "../samples/flick-object-sample";
-import BottomTab from "../components/BottomTab";
+import {ScrollView} from "react-native";
 import TopTab from "../components/TopTab";
-import UserInformation from "../components/UserInformation";
-import MyRangeSelector from "../components/MyRangeSelector";
-import MyButton from "../components/MyButton";
-import LastFlick from "../components/LastFlick";
 import EditProfile from "../components/EditProfile";
-import UserInformationEditProfile from "../components/UserInformationEditProfile";
+import ToasterContainer from "../components/Toasters/ToasterContainer";
 
 
 export default function Settings ({navigation}) {
-    const handleValueChange = (newValue) => {
-        console.log(`New value: ${newValue}`);
-    }
     return (
-
-        
         <>
             <TopTab navigation={navigation} />
+            <ToasterContainer />
             <ScrollView
                 style={{
                     backgroundColor: "white"
                 }}
             >
-                <UserInformationEditProfile/>
-            <MyRangeSelector onValueChange={handleValueChange} />
-            <EditProfile/>
+                <EditProfile/>
             </ScrollView>
-            <BottomTab navigation={navigation}/>
         </>
     )
 }

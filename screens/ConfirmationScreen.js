@@ -9,14 +9,10 @@ import {useUserContext} from "../context/userContext";
 import axios from "axios";
 import {manipulateAsync, SaveFormat} from "expo-image-manipulator";
 import Loading from "../components/Loading";
-import {onValue, ref} from "firebase/database";
-import {db} from "../firebase";
-import ToasterContainer from "../components/Toasters/ToasterContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {showToaster} from "../redux/actions/toasterActions";
-import Bold from "../components/Utils/Bold";
-import {setCurrentObject, setHasUserTookCurrentObject} from "../redux/actions/objectActions";
-import {parser} from "../utils/functions";
+import {delay, parser} from "../utils/functions";
+import {getAuthedUserStorage, setAuthedUserStorage} from "../services/storage-manager";
 
 
 export default function ConfirmationScreen ({navigation}) {
@@ -50,31 +46,47 @@ export default function ConfirmationScreen ({navigation}) {
             name: 'image.jpeg'
         });
 
-        const {data: {message: metadataId}} = await axios.post(`https://flick-it-take-data-4nyk6wb3ua-ew.a.run.app/v1/upload/${user.displayName}`, formData, {headers})
-        const docRef = ref(db, `/metadata/${metadataId}`)
-        onValue(docRef, (snapshot) => {
-            const doc = snapshot.toJSON()
-            if (doc.status === 1) {
-                dispatch(setHasUserTookCurrentObject(true))
-                dispatch(setCurrentObject(null))
-                navigation.navigate("Home")
-                dispatch(showToaster({
-                    type: "SUCCESS",
-                    text: `Great shot, flick validated +${doc.point}⭐`
-                }))
-                setUpdateContext(Date.now())
-                setLoading(false)
-            } else if (doc.status === 2) {
-                setLoading(false)
-                setTakenFlick(null)
-                navigation.goBack()
-                dispatch(showToaster({
-                    type: "ERROR",
-                    text: `What is this flick ? You are supposed to take a ${doc.word}, try again`
-                }))
-            }
-        })
+        const {data: {message: metadataId}} = await axios.post(`https://flick-it-take-data-4nyk6wb3ua-ew.a.run.app/v1/upload/${user.uid}`, formData, {headers})
+        let status = 0
+        let metadata = null
 
+        do {
+            const {data} = await axios.get(`https://flick-it-metadata-4nyk6wb3ua-ew.a.run.app/v1/metadata/${metadataId}`, {accept: 'application/json'})
+            metadata = data
+            status = data.status
+            await delay(100)
+            console.log(status)
+        } while (status === 0)
+
+        console.log(metadata)
+
+        if (status === 1) {
+            const userStorage = await getAuthedUserStorage(user?.uid)
+            console.log(userStorage)
+            const newLastFlick = [...userStorage.lastFlicks]
+            newLastFlick.push({
+                flickImage: takenFlick.uri,
+                timeTaken: timeTaken,
+                object: object.currentObject,
+                date: metadata.date
+            })
+            await setAuthedUserStorage(user?.uid, null, newLastFlick, null)
+            navigation.navigate("Home")
+            setUpdateContext(Date.now())
+            setLoading(false)
+            dispatch(showToaster({
+                type: "SUCCESS",
+                text: `Great shot, flick validated +${metadata.point}⭐`
+            }))
+        } else {
+            setTakenFlick(null)
+            navigation.goBack()
+            setLoading(false)
+            dispatch(showToaster({
+                type: "ERROR",
+                text: `What is this flick ? You are supposed to take a ${metadata.word}, try again`
+            }))
+        }
     }
 
     return (

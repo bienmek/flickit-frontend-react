@@ -55,7 +55,6 @@ export default function ErrorToaster ({error}) {
                     }}
                 >
                     <LoadingBar color={"#e10000"}/>
-
                 </View>
 
                 <View

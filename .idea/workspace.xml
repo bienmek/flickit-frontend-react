@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3f5fcb4-d567-45ec-a647-7c54146708d5" name="Changes" comment="" />
+    <list default="true" id="b3f5fcb4-d567-45ec-a647-7c54146708d5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/components/CountDown.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EditProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/EditProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EyesRoutine.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/EyesRoutine.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LastFlick.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LastFlick.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MyButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/MyButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MyRangeSelector.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/MyRangeSelector.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Toasters/ErrorToaster.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Toasters/ErrorToaster.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Toasters/SuccessToaster.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Toasters/SuccessToaster.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/TopTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/TopTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/UserInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/UserInformation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/UserInformationEditProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/UserInformationEditProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/flickContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/flickContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/userContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/userContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/actions/objectActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/actions/objectActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/slices/objectSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/slices/objectSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/ConfirmationScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/ConfirmationScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/storage-manager.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/storage-manager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,13 +62,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/ugo/Documents/Projects/WorldTask/mobile-app/WorldTask-v0.1/context/userContext.js",
+    "last_opened_file_path": "/home/ugo/Documents/Projects/WorldTask/mobile-app/WorldTask-v0.1/components/Comments/CommentCard.jsx",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
     "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/opt/WebStorm-223.7571.168/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -79,7 +106,7 @@
       <workItem from="1673852737182" duration="22339000" />
       <workItem from="1673938341955" duration="11780000" />
       <workItem from="1674287095350" duration="11312000" />
-      <workItem from="1674383725036" duration="53339000" />
+      <workItem from="1674383725036" duration="89404000" />
     </task>
     <servers />
   </component>
@@ -97,7 +124,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>

@@ -1,4 +1,4 @@
-import {Image, Text, View} from "react-native";
+import {Dimensions, Image, Text, View} from "react-native";
 import {dark_gray, primary} from "../utils/colors";
 import sleep from "../assets/images/eyes_sleep.png";
 import sleepy from "../assets/images/eyes_sleepy.png";
@@ -7,6 +7,8 @@ import eyes from "../assets/images/eyes.png";
 
 
 export default function EyesRoutine ({handleEyes}) {
+
+    const HEIGHT = Dimensions.get("window").height
 
     const computeTitles = () => {
         switch (handleEyes) {
@@ -22,7 +24,15 @@ export default function EyesRoutine ({handleEyes}) {
     }
 
     return (
-        <>
+        <View
+            style={{
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 20,
+                top: HEIGHT/9
+            }}
+        >
             <View>
                 <Image
                     source={handleEyes}
@@ -61,6 +71,6 @@ export default function EyesRoutine ({handleEyes}) {
                     {computeTitles()}
                 </Text>
             </View>
-        </>
+        </View>
     )
 }

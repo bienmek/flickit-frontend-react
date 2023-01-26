@@ -2,13 +2,14 @@ import {TouchableOpacity, View, Text} from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import {useDispatch} from "react-redux";
-import {hideToaster} from "../../redux/actions/toasterActions";
+import {hideToaster, showToaster} from "../../redux/actions/toasterActions";
 import {useEffect} from "react";
 import LoadingBar from "../Utils/LoadingBar";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {primary} from "../../utils/colors";
 
 export default function SuccessToaster ({successMessage}) {
+
     const dispatch = useDispatch()
 
     return (
@@ -57,14 +58,14 @@ export default function SuccessToaster ({successMessage}) {
                     bottom: 0
                 }}
             >
-                <LoadingBar color={"#25995C"}/>
+                <LoadingBar color={primary}/>
 
             </View>
 
             <View
                 style={{
                     paddingHorizontal: 30,
-                    paddingVertical: 20,
+                    paddingVertical: 30,
                     alignItems: "center",
                     justifyContent: "center",
                     height: "100%",

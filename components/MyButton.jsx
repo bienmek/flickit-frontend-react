@@ -6,8 +6,7 @@ function MyButton({ title, onPress }) {
     <TouchableOpacity
       style={{ 
         backgroundColor: "blue", 
-        padding: 10, 
-        borderRadius: 5, 
+        padding: 10,
         width: '50%', 
         alignItems: "center", 
         alignSelf: "center", 

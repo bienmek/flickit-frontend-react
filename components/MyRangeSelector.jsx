@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, Slider } from "react-native";
+import { View, TextInput, Text } from "react-native";
 import {
-  dark_gray,
-  gray,
-  legendary,
-  light_gray,
   primary,
-  rare,
-  secondary,
-  super_rare,
 } from "../utils/colors";
+import {Slider} from "@miblanchard/react-native-slider";
 
-function MyRangeSelector({ onValueChange }) {
+function MyRangeSelector({ slideValue }) {
   const [value, setValue] = useState(1);
   
   return (
@@ -31,17 +25,17 @@ function MyRangeSelector({ onValueChange }) {
             fontWeight: "bold",
           }}
         >
-          Number of notifications : {value}
+          Notifications per day: {value}
         </Text>
-        <View style={{ width: "50%", alignSelf: "center"}}>
+        <View style={{ width: "80%", alignSelf: "center"}}>
           <Slider
             minimumValue={1}
-            maximumValue={12}
+            maximumValue={24}
             step={1}
             value={value}
             onValueChange={(newValue) => {
               setValue(newValue);
-              onValueChange(newValue);
+              slideValue(newValue);
             }}
           />
         </View>

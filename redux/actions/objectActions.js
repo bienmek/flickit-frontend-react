@@ -1,15 +1,19 @@
 import {objectSlice} from "../slices/objectSlice";
 import {getAuthedUserStorage} from "../../services/storage-manager";
 import axios from "axios";
+import {delay} from "../../utils/functions";
 
-export const {setCurrentObject, setTimeLeft, setHasUserTookCurrentObject} = objectSlice.actions
+export const {setCurrentObject, setTimeLeft, setHasUserTookCurrentObject, setIsCountDown, resetObject} = objectSlice.actions
 
-export async function objectRoutine (dispatch, uid, currentObject, hasUserTookCurrentObject) {
-    //const authedUserStorage = await getAuthedUserStorage(uid)
-    const hoursListNotifications = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0]
+export async function objectRoutine (dispatch, uid, currentObject, hasUserTookCurrentObject, navigation) {
+    const authedUserStorage = await getAuthedUserStorage(uid)
+    const hoursListNotifications = authedUserStorage.notificationHoursList
+
     const NOW = new Date(Date.now())
 
     if (hasUserTookCurrentObject) {
+        dispatch(setCurrentObject(null))
+        return
     }
 
     if (!hoursListNotifications.includes(NOW.getHours())) {
@@ -25,16 +29,22 @@ export async function objectRoutine (dispatch, uid, currentObject, hasUserTookCu
         const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
         const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
+        if (diffMinutes === 0 && diffSeconds === 0) {
+            dispatch(resetObject())
+            return
+        }
+
         const rawTimeLeft = {
             hours: diffHours,
             minutes: diffMinutes,
             seconds: diffSeconds
         }
-
         dispatch(setTimeLeft(JSON.stringify(rawTimeLeft)))
-        console.log("DEBUG 4")
+        return
     }
-
+    navigation.navigate("Home")
+    setIsCountDown(true)
+    await delay(5000)
     const {data} = await axios.get("https://flick-it-wordinfo-4nyk6wb3ua-ew.a.run.app/v1/word", {
         accept: "application/json"
     })
@@ -45,6 +55,7 @@ export async function objectRoutine (dispatch, uid, currentObject, hasUserTookCu
         rarity: data.rarity,
         image: data.image
     }
+
     dispatch(setCurrentObject(JSON.stringify(rawData)))
 }
 
@@ -53,11 +64,17 @@ export async function computeHasUserTookCurrentObject (dispatch, uid) {
     const userLastFlicks = authedUserStorage.lastFlicks
     const NOW = new Date(Date.now())
 
+    if (!userLastFlicks) {
+        dispatch(setHasUserTookCurrentObject(false))
+        return
+    }
+
     if (userLastFlicks.some((item) => {
-        const buff = item.date.split('').splice(0, 2)
-        const hours = buff.filter((item) => item !== "0").reduce((previousValue, currentValue) => previousValue + currentValue)
-        return hours === NOW.getHours().toString()
+        const date = new Date(item.date)
+        return (date.getHours()+1 === NOW.getHours()) && (date.getDay() === NOW.getDay())
     })) {
         dispatch(setHasUserTookCurrentObject(true))
+    } else {
+        dispatch(setHasUserTookCurrentObject(false))
     }
 }

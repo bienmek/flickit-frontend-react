@@ -1,8 +1,4 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {onValue, ref} from "firebase/database";
-import {db} from "../firebase";
-import axios from "axios";
-import {useUserContext} from "./userContext";
+import {createContext, useContext, useState} from "react";
 
 const FlickContext = createContext({})
 
@@ -11,8 +7,6 @@ export const useFlickContext = () => useContext(FlickContext)
 export default function FlickContextProvider ({children}) {
     const [takenFlick, setTakenFlick] = useState(null);
     const [timeTaken, setTimeTaken] = useState(null);
-
-
 
     function computeTimeTaken () {
         const NOW = new Date(Date.now())
