@@ -222,7 +222,6 @@ export default function MostStars() {
           </View>
         </View>
       </View>
-      <View></View>
     </>
   );
 }
